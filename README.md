@@ -1,87 +1,7 @@
-## DAFormer: Improving Network Architectures and Training Strategies for Domain-Adaptive Semantic Segmentation
+## RASC
 
-**by [Lukas Hoyer](https://lhoyer.github.io/), [Dengxin Dai](https://vas.mpi-inf.mpg.de/dengxin/), and [Luc Van Gool](https://scholar.google.de/citations?user=TwMib_QAAAAJ&hl=en)**
 
-**[[Arxiv]](https://arxiv.org/abs/2111.14887)**
-**[[Paper]](https://arxiv.org/pdf/2111.14887.pdf)**
 
-:bell: We are happy to announce that DAFormer was accepted at **CVPR22**. :bell:
-
-:bell: We are happy to announce that our follow-up work [HRDA](https://github.com/lhoyer/HRDA) on high-resolution UDA was accepted at **ECCV22**. :bell:
-
-## Overview
-
-As acquiring pixel-wise annotations of real-world images for semantic
-segmentation is a costly process, a model can instead be trained with more
-accessible synthetic data and adapted to real images without requiring their
-annotations. This process is studied in **Unsupervised Domain Adaptation (UDA)**.
-
-Even though a large number of methods propose new UDA strategies, they
-are mostly based on outdated network architectures. In this work, we
-particularly study the influence of the network architecture on UDA performance
-and propose **DAFormer**, a network architecture tailored for UDA. It consists of a
-Transformer encoder and a multi-level context-aware feature fusion decoder.
-
-DAFormer is enabled by three simple but crucial training strategies to stabilize the
-training and to avoid overfitting the source domain: While the
-**Rare Class Sampling** on the source domain improves the quality of pseudo-labels
-by mitigating the confirmation bias of self-training towards common classes,
-the **Thing-Class ImageNet Feature Distance** and a **Learning Rate Warmup** promote
-feature transfer from ImageNet pretraining.
-
-DAFormer significantly improves
-the state-of-the-art performance **by 10.8 mIoU for GTA→Cityscapes**
-and **by 5.4 mIoU for Synthia→Cityscapes** and enables learning even
-difficult classes such as train, bus, and truck well.
-
-![UDA over time](resources/uda_over_time.png)
-
-The strengths of DAFormer, compared to the previous state-of-the-art UDA method
-ProDA, can also be observed in qualitative examples from the Cityscapes
-validation set.
-
-![Demo](resources/demo.gif)
-![Color Palette](resources/color_palette.png)
-
-For more information on DAFormer, please check our
-[[Paper]](https://arxiv.org/pdf/2111.14887.pdf).
-
-If you find this project useful in your research, please consider citing:
-
-```
-@InProceedings{hoyer2022daformer,
-  title={{DAFormer}: Improving Network Architectures and Training Strategies for Domain-Adaptive Semantic Segmentation},
-  author={Hoyer, Lukas and Dai, Dengxin and Van Gool, Luc},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  pages={9924--9935},
-  year={2022}
-}
-```
-
-## Comparison with State of the Art
-
-|                     | GTA→Cityscapes | Synthia→Cityscapes | Cityscapes→ACDC | Cityscapes→DarkZurich |
-|---------------------|----------------|--------------------|-----------------|-----------------------|
-| ADVENT [1]          | 45.5           | 41.2               | 32.7            | 29.7                  |
-| BDL [2]             | 48.5           | --                 | 37.7            | 30.8                  |
-| FDA [3]             | 50.5           | --                 | 45.7            | --                    |
-| DACS [4]            | 52.1           | 48.3               | --              | --                    |
-| ProDA [5]           | 57.5           | 55.5               | --              | --                    |
-| MGCDA [6]           | --             | --                 | 48.7            | 42.5                  |
-| DANNet [7]          | --             | --                 | 50.0            | 45.2                  |
-| **DAFormer (Ours)** | **68.3**       | **60.9**           | **55.4***       | **53.8***             |
-
-&ast; New results obtained after CVPR'22 publication of DAFormer
-
-References:
-
-1. Vu et al. "Advent: Adversarial entropy minimization for domain adaptation in semantic segmentation" in CVPR 2019.
-2. Li et al. "Bidirectional learning for domain adaptation of semantic segmentation" in CVPR 2019.
-3. Yang et al. "Fda: Fourier domain adaptation for semantic segmentation" in CVPR 2020.
-4. Tranheden et al. "Dacs: Domain adaptation via crossdomain mixed sampling" in WACV 2021.
-5. Zhang et al. "Prototypical pseudo label denoising and target structure learning for domain adaptive semantic segmentation" in CVPR 2021.
-6. Sakaridis et al. "Map-guided curriculum domain adaptation and uncertaintyaware evaluation for semantic nighttime image segmentation" in TPAMI, 2020.
-7. Wu et al. "DANNet: A one-stage domain adaptation network for unsupervised nighttime semantic segmentation" in CVPR, 2021.
 
 ## Setup Environment
 
@@ -255,18 +175,6 @@ For more information about the framework structure and the config system,
 please refer to the [mmsegmentation documentation](https://mmsegmentation.readthedocs.io/en/latest/index.html)
 and the [mmcv documentation](https://mmcv.readthedocs.ihttps://arxiv.org/abs/2007.08702o/en/v1.3.7/index.html).
 
-The most relevant files for DAFormer are:
-
-* [configs/daformer/gta2cs_uda_warm_fdthings_rcs_croppl_a999_daformer_mitb5_s0.py](configs/daformer/gta2cs_uda_warm_fdthings_rcs_croppl_a999_daformer_mitb5_s0.py):
-  Annotated config file for the final DAFormer.
-* [mmseg/models/uda/dacs.py](mmseg/models/uda/dacs.py):
-  Implementation of UDA self-training with ImageNet Feature Distance.
-* [mmseg/datasets/uda_dataset.py](mmseg/datasets/uda_dataset.py):
-  Data loader for UDA with Rare Class Sampling.
-* [mmseg/models/decode_heads/daformer_head.py](mmseg/models/decode_heads/daformer_head.py):
-  Implementation of DAFormer decoder with context-aware feature fusion.
-* [mmseg/models/backbones/mix_transformer.py](mmseg/models/backbones/mix_transformer.py):
-  Implementation of Mix Transformer encoder (MiT).
 
 ## Acknowledgements
 
