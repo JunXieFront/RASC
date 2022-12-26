@@ -30,17 +30,6 @@ sh tools/download_checkpoints.sh
 
 All experiments were executed on a NVIDIA RTX 2080 Ti.
 
-## Inference Demo
-
-Already as this point, the provided DAFormer model (downloaded by
-`tools/download_checkpoints.sh`) can be applied to a demo image:
-
-```shell
-python -m demo.image_demo demo/demo.png work_dirs/211108_1622_gta2cs_daformer_s0_7f24c/211108_1622_gta2cs_daformer_s0_7f24c.json work_dirs/211108_1622_gta2cs_daformer_s0_7f24c/latest.pth
-```
-
-When judging the predictions, please keep in mind that DAFormer had no access
-to real-world labels during the training.
 
 ## Setup Datasets
 
@@ -175,7 +164,8 @@ For more information about the framework structure and the config system,
 please refer to the [mmsegmentation documentation](https://mmsegmentation.readthedocs.io/en/latest/index.html)
 and the [mmcv documentation](https://mmcv.readthedocs.ihttps://arxiv.org/abs/2007.08702o/en/v1.3.7/index.html).
 
-
+## The quantitative result
+[quantitative result](images/result.pdf)
 ## Acknowledgements
 
 This project is based on the following open-source projects. We thank their
@@ -183,4 +173,4 @@ authors for making the source code publically available.
 
 * [MMSegmentation](https://github.com/open-mmlab/mmsegmentation)
 * [SegFormer](https://github.com/NVlabs/SegFormer)
-* [DACS](https://github.com/vikolss/DACS)
+* [DAFormer](https://github.com/lhoyer/DAFormer)
