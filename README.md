@@ -165,7 +165,7 @@ please refer to the [mmsegmentation documentation](https://mmsegmentation.readth
 and the [mmcv documentation](https://mmcv.readthedocs.ihttps://arxiv.org/abs/2007.08702o/en/v1.3.7/index.html).
 
 ## The quantitative result
-[quantitative result](images/result.pdf)
+ ![image](./images/result.pdf)
 ## Acknowledgements
 
 This project is based on the following open-source projects. We thank their
